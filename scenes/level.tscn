@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://duu6d220sw1t6"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_54dpx"]
+[ext_resource type="PackedScene" uid="uid://c4ljq8fls3bol" path="res://scenes/player.tscn" id="1_jj3al"]
+[ext_resource type="PackedScene" uid="uid://rtav1if13h6v" path="res://scenes/ball.tscn" id="2_65oan"]
+
+[sub_resource type="Curve2D" id="Curve2D_rruhb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -49, 33, 0, 0, 0, 0, 252, 23, 0, 0, 0, 0, 485, 26, 0, 0, 0, 0, 486, 94, 0, 0, 0, 0, 209, 90, 0, 0, 0, 0, 212, 201, 0, 0, 0, 0, 567, 198, 0, 0, 0, 0, 564, 45, 0, 0, 0, 0, 883, 43, 0, 0, 0, 0, 887, 186, 0, 0, 0, 0, 1151, 205, 0, 0, 0, 0, 1144, 470, 0, 0, 0, 0, 1040, 596, 0, 0, 0, 0, 939, 440, 0, 0, 0, 0, 796, 571, 0, 0, 0, 0, 752, 716, 0, 0, 0, 0, 554, 581, 0, 0, 0, 0, 503, 485, 0, 0, 0, 0, 283, 462, 0, 0, 0, 0, 241, 585, 0, 0, 0, 0, 86, 519, 0, 0, 0, 0, 140, 386, 0, 0, 0, 0, 281, 307)
+}
+point_count = 23
+
+[node name="Level" type="Node"]
+script = ExtResource("1_54dpx")
+ball_scene = ExtResource("2_65oan")
+
+[node name="Player" parent="." instance=ExtResource("1_jj3al")]
+position = Vector2(647, 358)
+
+[node name="Walk" type="Node" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Walk"]
+curve = SubResource("Curve2D_rruhb")
+
+[node name="TimerCreateBall" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="TimerCreateBall" to="." method="_on_timer_create_ball_timeout"]
