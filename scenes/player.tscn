@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_joehn"]
 [ext_resource type="Texture2D" uid="uid://dk3816boxhuhr" path="res://art/frog1.png" id="1_mlwjr"]
-[ext_resource type="PackedScene" uid="uid://rtav1if13h6v" path="res://scenes/ball.tscn" id="2_porot"]
+[ext_resource type="PackedScene" uid="uid://swp0e4ulfos2" path="res://scenes/path_follow_ball.tscn" id="2_h54wm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1bqef"]
 radius = 26.6833
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_joehn")
-ball_scene = ExtResource("2_porot")
+pathfollow_ball_scene = ExtResource("2_h54wm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708

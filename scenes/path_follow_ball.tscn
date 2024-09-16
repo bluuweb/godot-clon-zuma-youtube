@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://swp0e4ulfos2"]
+
+[ext_resource type="Script" path="res://scripts/path_follow_ball.gd" id="1_7du8c"]
+[ext_resource type="Texture2D" uid="uid://bm3w7k4einuvg" path="res://art/ball-blue.png" id="1_7p1hg"]
+[ext_resource type="Texture2D" uid="uid://bur47d1tjcnh7" path="res://art/ball_red.png" id="2_lnafd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_swegq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7p1hg")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lnafd")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nd6ws"]
+radius = 3.0
+
+[node name="PathFollowBall" type="PathFollow2D"]
+rotates = false
+cubic_interp = false
+loop = false
+script = ExtResource("1_7du8c")
+
+[node name="Area2DBall" type="Area2D" parent="."]
+scale = Vector2(5, 5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2DBall"]
+sprite_frames = SubResource("SpriteFrames_swegq")
+animation = &"blue"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DBall"]
+shape = SubResource("CircleShape2D_nd6ws")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="area_entered" from="Area2DBall" to="." method="_on_area_2d_ball_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

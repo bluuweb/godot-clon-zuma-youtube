@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ce7hiq8ysj2q3"]
+
+[ext_resource type="Script" path="res://scripts/level_2.gd" id="1_cwonm"]
+[ext_resource type="PackedScene" uid="uid://swp0e4ulfos2" path="res://scenes/path_follow_ball.tscn" id="2_vmsyi"]
+[ext_resource type="PackedScene" uid="uid://c4ljq8fls3bol" path="res://scenes/player.tscn" id="3_2ps5u"]
+
+[sub_resource type="Curve2D" id="Curve2D_eytfc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 62, 24, 0, 0, 0, 0, 761, 27, 0, 0, 0, 0, 768, 147, 0, 0, 0, 0, 64, 145, 0, 0, 0, 0, 67, 671, 0, 0, 0, 0, 1228, 679, 0, 0, 0, 0, 1222, 33)
+}
+point_count = 7
+
+[node name="Level2" type="Node"]
+script = ExtResource("1_cwonm")
+pathfollow_ball_scene = ExtResource("2_vmsyi")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_eytfc")
+
+[node name="Player" parent="." instance=ExtResource("3_2ps5u")]
+position = Vector2(654, 411)
+
+[node name="TimerCreateBall" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="TimerCreateBall" to="." method="_on_timer_create_ball_timeout"]

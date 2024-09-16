@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var ball_scene: PackedScene
+@export var pathfollow_ball_scene: PackedScene
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -15,15 +15,8 @@ func _physics_process(delta: float) -> void:
 	get_input()
 
 func create_ball():
-	# Calcula la dirección desde el jugador hacia el mouse
-	#var direction_to_mouse = (get_global_mouse_position() - global_position).normalized()
-	
-	# Usamos direction_to para obtener la dirección hacia el mouse
 	var direction_to_mouse = global_position.direction_to(get_global_mouse_position())
+	var pathfollow_ball = pathfollow_ball_scene.instantiate()
+	pathfollow_ball.create_ball_player(direction_to_mouse, global_position)
+	get_parent().add_child(pathfollow_ball)
 	
-	var ball = ball_scene.instantiate()
-	ball.direction_mouse = direction_to_mouse
-	ball.position = global_position
-	ball.direction_player = global_position
-	ball.is_player_ball = true
-	get_parent().add_child(ball)
